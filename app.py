@@ -29,12 +29,24 @@ total_profit = filtered_df['Profit'].sum()
 total_quantity = filtered_df['Quantity'].sum()
 total_orders = filtered_df['Order ID'].nunique()
 
-st.metric("Total Sales", f"${total_sales:,.2f}")
-st.metric("Total Profit", f"${total_profit:,.2f}")
-st.metric("Total Quantity Sold", total_quantity)
-st.metric("Total Orders", total_orders)
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("Total Sales", f"${total_sales:,.2f}")
+col2.metric("Total Profit", f"${total_profit:,.2f}")
+col3.metric("Quantity Sold", total_quantity)
+col4.metric("Total Orders", total_orders)
 
 # Sales Over Time
 st.subheader("Sales Over Time")
 sales_over_time = filtered_df.groupby('Order Date')['Sales'].sum().reset_index()
-fig1 = px.line(sales_over_time, x='Order Date', y
+fig1 = px.line(sales_over_time, x='Order Date', y='Sales', title='Sales Over Time')
+st.plotly_chart(fig1, use_container_width=True)
+
+# Category-wise Sales
+st.subheader("Sales by Category")
+category_sales = filtered_df.groupby('Category')['Sales'].sum().reset_index()
+fig2 = px.bar(category_sales, x='Category', y='Sales', color='Category', title='Sales by Category')
+st.plotly_chart(fig2, use_container_width=True)
+
+# Region-wise Profit
+st.subh
+
