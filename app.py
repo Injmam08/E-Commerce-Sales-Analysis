@@ -48,5 +48,5 @@ fig2 = px.bar(category_sales, x='Category', y='Sales', color='Category', title='
 st.plotly_chart(fig2, use_container_width=True)
 
 # Region-wise Profit
-st.subh
+st.subheader("Your Subheading Here")
 
